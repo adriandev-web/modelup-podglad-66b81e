@@ -242,7 +242,8 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px}
   footer .wrap{grid-template-columns:1fr}
   .shot{width:78vw}
   .car{-webkit-mask-image:none;mask-image:none}
-  .mcta{display:block;position:fixed;inset:auto 0 0 0;z-index:30;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(11,10,12,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+  .mcta{display:block;position:fixed;inset:auto 0 0 0;z-index:30;transform:translateY(110%);transition:transform .35s cubic-bezier(.2,.7,.2,1);padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(11,10,12,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+  .mcta.show{transform:none}
   .mcta .btn{width:100%}
   body{padding-bottom:78px}
 }
@@ -447,6 +448,10 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px}
 
 <script>
 (function(){
+  (function(){var bar=document.querySelector('.mcta'),btn=document.querySelector('#aplikuj .btn');if(!bar||!btn)return;var vis=true;
+    function upd(){bar.classList.toggle('show',window.scrollY>160&&!vis)}
+    if('IntersectionObserver' in window){new IntersectionObserver(function(e){vis=e[0].isIntersecting;upd()}).observe(btn)}else{vis=false}
+    window.addEventListener('scroll',upd,{passive:true});upd()})();
   var f=document.getElementById('aplikuj');
   function bad(id,cond){var el=document.getElementById(id).closest('.field');el.classList.toggle('bad',cond);return cond}
   f.addEventListener('submit',function(e){
