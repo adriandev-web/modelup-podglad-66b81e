@@ -295,10 +295,10 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px}
       <div id="formBody">
         <h2>Zostaw kontakt</h2>
         <p class="sub">Odezwiemy się w ciągu 24 godzin.</p>
-        <div class="field"><label for="kontakt">Instagram lub e-mail</label><input id="kontakt" name="kontakt" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="np. @twoj_insta lub imie@mail.pl"><div class="err">Podaj nazwę na Instagramie lub poprawny e-mail</div></div>
+        <div class="field"><label for="kontakt">Telegram, WhatsApp lub e-mail</label><input id="kontakt" name="kontakt" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="np. @login, 500 000 000 lub imie@mail.pl"><div class="err">Podaj login na Telegramie, numer telefonu (WhatsApp) lub e-mail</div></div>
         <input type="text" name="firma" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
         <button class="btn" type="submit">Aplikuj teraz<svg class="ico"><use href="#i-rocket"/></svg></button>
-        <p class="note">Wysyłając zgłoszenie, potwierdzasz, że masz ukończone 18 lat, i akceptujesz <a href="#">politykę prywatności</a>. Zarobki zależą od zaangażowania i nie są gwarantowane. Kwota 15 000 zł dotyczy najlepszych miesięcy.</p>
+        <p class="note">Wysyłając zgłoszenie, potwierdzasz, że masz ukończone 18 lat, i akceptujesz <a href="#">politykę prywatności</a>.</p>
       </div>
       <div class="ok" id="formOk">
         <div class="circ"><svg class="ico"><use href="#i-check"/></svg></div>
@@ -351,7 +351,7 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px}
   <div class="wrap steps-wrap">
     <div class="head"><h2 class="t">Trzy kroki do pierwszych zarobków</h2></div>
     <div class="steps">
-      <div class="step"><span class="n">1</span><div><h3>Wypełniasz formularz</h3><p>Zostawiasz Instagram lub e-mail. Zajmuje to kilka sekund i nic Cię nie kosztuje.</p></div></div>
+      <div class="step"><span class="n">1</span><div><h3>Wypełniasz formularz</h3><p>Zostawiasz Telegram, WhatsApp lub e-mail. Zajmuje to kilka sekund i nic Cię nie kosztuje.</p></div></div>
       <div class="step"><span class="n">2</span><div><h3>Rozmawiamy o szczegółach</h3><p>Odpisujemy w ciągu 24 godzin, wyjaśniamy zasady współpracy i odpowiadamy na każde pytanie. Bez zobowiązań.</p></div></div>
       <div class="step"><span class="n">3</span><div><h3>Startujemy razem</h3><p>Wdrażamy Cię od zera. Ty tworzysz treści, my dbamy o resztę.</p></div></div>
     </div>
@@ -423,7 +423,7 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px}
   <div class="wrap">
     <div class="box">
       <h2>Zgłoś się dziś, odpiszemy w ciągu 24 godzin</h2>
-      <p>Zostaw Instagram lub e-mail. Bez opłat i bez zobowiązań.</p>
+      <p>Zostaw Telegram, WhatsApp lub e-mail. Bez opłat i bez zobowiązań.</p>
       <a class="btn" href="#aplikuj">Aplikuj teraz<svg class="ico"><use href="#i-rocket"/></svg></a>
     </div>
   </div>
@@ -436,7 +436,7 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px}
     <img src="assets/logo-modelup.png" alt="ModelUp" width="135" height="26">
     <div>
       <p>Serwis zawiera treści przeznaczone wyłącznie dla osób pełnoletnich. Współpracę podejmujemy tylko z osobami, które ukończyły 18 lat. Wszystkie uczestniczki działają dobrowolnie.</p>
-      <p>Zarobki zależą od zaangażowania i nie są gwarantowane.</p>
+      <p>Zarobki zależą od zaangażowania i nie są gwarantowane. Kwota 15 000 zł dotyczy najlepszych miesięcy.</p>
       <nav><a href="#">Polityka prywatności</a><a href="#">Regulamin</a><a href="#">Kontakt</a></nav>
       <p>© 2026 ModelUp. Dane firmy: do uzupełnienia.</p>
     </div>
@@ -451,9 +451,9 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px}
   function bad(id,cond){var el=document.getElementById(id).closest('.field');el.classList.toggle('bad',cond);return cond}
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var v=document.getElementById('kontakt').value.trim();
-    var okMail=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v),okIg=/^(https?:\/\/(www\.)?instagram\.com\/)?@?[A-Za-z0-9._]{2,30}\/?$/.test(v)&&!/^\d+$/.test(v);
-    if(bad('kontakt',!(okMail||okIg)))return;
+    var v=document.getElementById('kontakt').value.trim(),digits=v.replace(/[\s-]/g,'');
+    var okMail=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v),okIg=/^@[A-Za-z0-9_]{5,32}$/.test(v),okTel=/^\+?\d{9,15}$/.test(digits);
+    if(bad('kontakt',!(okMail||okIg||okTel)))return;
     if(f.elements.firma.value)return;
     /* TODO: wysyłka do CRM / webhooka + zdarzenie Lead (Pixel i CAPI) */
     document.getElementById('formBody').style.display='none';
