@@ -1,0 +1,17 @@
+/* baner cookies */
+.ck{position:fixed;z-index:80;left:16px;right:16px;bottom:16px;max-width:560px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.55);color:var(--text);font-family:'Montserrat',system-ui,sans-serif;font-size:.88rem;line-height:1.55;display:none}
+.ck.show{display:block}
+.ck h2{font-size:1.02rem;margin-bottom:6px}
+.ck p{color:var(--muted);margin-bottom:14px}
+.ck p a{color:var(--rose-2)}
+.ck .row{display:flex;gap:8px;flex-wrap:wrap}
+.ck button{font:inherit;font-weight:700;font-size:.86rem;border-radius:999px;padding:11px 18px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--text);flex:1 1 auto;min-height:44px}
+.ck button.pri{background:linear-gradient(135deg,var(--btn-a),var(--btn-b));border-color:transparent}
+.ck button:focus-visible{outline:2px solid var(--rose-2);outline-offset:2px}
+.ck .opts{display:none;margin:0 0 14px;border-top:1px solid var(--line)}
+.ck.det .opts{display:block}
+.ck .opt{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.ck .opt b{display:block;font-size:.88rem}
+.ck .opt span{color:var(--muted);font-size:.8rem}
+.ck input[type=checkbox]{width:22px;height:22px;accent-color:var(--rose);flex:none;margin-top:2px}
+@media(min-width:700px){.ck{left:auto;right:24px;bottom:24px}}
